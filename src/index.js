@@ -7,13 +7,17 @@ import GlobalStyle from 'styles/global';
 import { themeLight, themeDark } from 'styles/theme';
 import { AppThemeProvider, useAppTheme } from 'context/AppTheme';
 
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 const AppRenderTheme = memo(() => {
   const { theme } = useAppTheme();
 
   return (
     <ThemeProvider theme={theme === 'light' ? themeLight : themeDark}>
       <GlobalStyle />
-      <Home/>
+      <Routes>
+        <Route path="/trademark" element={<Home />} />
+      </Routes>
     </ThemeProvider>
   );
 });
@@ -29,6 +33,8 @@ const App = () => {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App/>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </React.StrictMode>
 );

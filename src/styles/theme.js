@@ -13,7 +13,8 @@ const colorsLight = {
   bgCard: 'rgba(100, 100, 200, .2)',
   bgGradiant: '#7072CB',
   text: '#000000',
-  nav: 'rgba(255, 255, 255, 0.8)'
+  nav: 'rgba(255, 255, 255, 0.8)',
+  paginationNav: '#9697A5'
 };
 
 const colorsDark = {

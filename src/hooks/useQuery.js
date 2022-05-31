@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 const baseUrl = `${process.env.REACT_APP_API_URL}/v1`;
 
-const useQuery = (url) => {
+const useQuery = (url, paramsPage) => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
   const [errors, setErrors] = useState(null);
@@ -11,7 +11,7 @@ const useQuery = (url) => {
   const getData = useCallback(async () => {
     setLoading(true);
     try {
-      const { data } = await axios.get(`${baseUrl}${url}`);
+      const { data } = await axios.get(`${baseUrl}${url}`, { params: { page: paramsPage } });
       setData(data);
       setLoading(false);
     } catch (err) {
@@ -20,7 +20,7 @@ const useQuery = (url) => {
       setLoading(false);
       throw new Error(err);
     }
-  }, [url]);
+  }, [url, paramsPage]);
 
   useEffect(() => {
     getData().then();
