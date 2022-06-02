@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { Row, Col } from 'react-grid-system';
-
 import useQuery from 'hooks/useQuery';
 import Title from 'components/Atoms/Tittle';
 import Button from 'components/Atoms/Button';
@@ -8,9 +7,7 @@ import RefreshIcon from '../components/Atoms/Icons/RefreshIcon';
 import Layout from 'components/Organisms/Layout';
 import CardTradeMark from 'components/Molecules/CardTradeMark';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-
 import styled from 'styled-components';
-
 import Pagination from '@mui/material/Pagination';
 
 function Home() {
@@ -45,7 +42,11 @@ function Home() {
         <Row>
           {data?.docs.map(({ id, trademarkName, urlImage }) => (
             <Col key={id} xs={12} md={6} lg={4}>
-              <CardTradeMark name={trademarkName} image={urlImage} />
+              <CardTradeMark
+                name={trademarkName}
+                image={urlImage}
+                onClick={() => alert(`Marca: ${trademarkName} \nIdMarca: ${id}`)}
+              />
             </Col>
           ))}
         </Row>
@@ -71,18 +72,18 @@ const StyledPagination = styled(Pagination)`
       border-color: ${({ theme }) => theme.colors.text};
       font-size: 20px;
       &:hover {
-        background: ${({ theme }) => theme.colors.paginationNav};
+        background: ${({ theme }) => theme.colors.secondary};
       }
     }
 .MuiPaginationItem-previousNext {
       color: ${({ theme }) => theme.colors.text};
       border-color ${({ theme }) => theme.colors.text};
       &:hover {
-        background: ${({ theme }) => theme.colors.paginationNav};
+        background: ${({ theme }) => theme.colors.secondary};
       }
     }
     .Mui-selected {
-      background: ${({ theme }) => theme.colors.paginationNav};
+      background: ${({ theme }) => theme.colors.secondary};
       &:hover {
         background: ${({ theme }) => theme.colors.background};
       }
