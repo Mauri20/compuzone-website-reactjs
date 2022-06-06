@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { Row, Col } from 'react-grid-system';
-import useQuery from 'hooks/useQuery';
+import { useQuery} from 'hooks/useQuery';
 import Title from 'components/Atoms/Tittle';
 import Button from 'components/Atoms/Button';
 import RefreshIcon from '../components/Atoms/Icons/RefreshIcon';
 import Layout from 'components/Organisms/Layout';
 import CardTradeMark from 'components/Molecules/CardTradeMark';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import {useSearchParams, useNavigate} from 'react-router-dom';
 import styled from 'styled-components';
 import Pagination from '@mui/material/Pagination';
 
@@ -45,7 +45,9 @@ function Home() {
               <CardTradeMark
                 name={trademarkName}
                 image={urlImage}
-                onClick={() => alert(`Marca: ${trademarkName} \nIdMarca: ${id}`)}
+                onClick={() => {
+                  navigate(`/shoes/filter?trademarkId=${id}`);
+                }}
               />
             </Col>
           ))}

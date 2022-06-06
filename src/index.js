@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
 
 import Home from 'pages/home';
+import CatalogueShoes from 'pages/shoes';
 import GlobalStyle from 'styles/global';
 import { themeLight, themeDark } from 'styles/theme';
 import { AppThemeProvider, useAppTheme } from 'context/AppTheme';
@@ -17,6 +18,7 @@ const AppRenderTheme = memo(() => {
       <GlobalStyle />
       <Routes>
         <Route path="/trademark" element={<Home />} />
+        <Route path="shoes/filter" element={<CatalogueShoes />} />
       </Routes>
     </ThemeProvider>
   );
