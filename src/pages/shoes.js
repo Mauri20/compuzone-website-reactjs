@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { Row, Col } from 'react-grid-system';
-import { useQueryShoes } from 'hooks/useQuery';
+import { useQueryShoes, useQueryWP, useQueryWS } from 'hooks/useQuery';
 import Title from 'components/Atoms/Tittle';
 import Button from 'components/Atoms/Button';
 import RefreshIcon from '../components/Atoms/Icons/RefreshIcon';
@@ -9,19 +9,46 @@ import CardShoes from 'components/Molecules/CardShoes';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Pagination from '@mui/material/Pagination';
+import Select from 'components/Atoms/Select';
 
 function CatalogueShoes(){
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [searchParams] = useSearchParams();
   const trademarkidPage = searchParams.get('trademarkId');
   const pageParam = searchParams.get('page');
 
   const { data, loading, refresh } = useQueryShoes('/shoes/filter', trademarkidPage, pageParam);
+  const { dataC, loadingC } = useQueryWP('/categories', null);
+  const { dataS, loadingS } = useQueryWS('/styles', null);
 
   useEffect(() => {
-    //console.log({ data, loading });
-  }, [loading, data]);
+    //console.log({ dataC, loadingC });
+  }, [loading, data, dataC, loadingC, dataS, loadingS]);
+
+  const dataSelectCategory = useMemo(() => {
+    if (!dataC) return [];
+    return dataC?.map((item) => {
+      const { id, categorieName = '' } = item;
+
+      return {
+        value: id,
+        label: categorieName
+      };
+    });
+  }, [dataC]);
+
+  const dataSelectStyle = useMemo(() => {
+    if (!dataS) return [];
+    return dataS?.map((item) => {
+      const { id, styleName = '' } = item;
+
+      return {
+        value: id,
+        label: styleName
+      };
+    });
+  }, [dataS]);
 
   const totalPages = data?.pageCount || 1;
 
@@ -35,6 +62,28 @@ function CatalogueShoes(){
         <Button onClick={refresh}>
           <RefreshIcon></RefreshIcon>
         </Button>
+      </div>
+      <br/>
+      <div className="container-select" style={{ textAlign: 'left', display: 'inline-block', marginRight: '15px' }}>
+        <Select
+          required
+          type="text"
+          name="category"
+          options={ dataSelectCategory }
+          isLoading={loadingC}
+          placeholder="Category"
+        />
+      </div>
+      <div className="container-select" style={{ textAlign: 'left', display: 'inline-block' }}>
+        <Select
+          required
+          type="text"
+          name="style"
+          options={ dataSelectStyle }
+          isLoading={ loadingS }
+          placeholder="Style"
+          //defaultInputValue={isUpdate ? `${pet?.trainer?.firstName} ${pet?.trainer?.lastName}` : undefined}
+        />
       </div>
       {loading ? (
         <p style={{ textAlign: 'center' }}>
@@ -53,8 +102,9 @@ function CatalogueShoes(){
                 category={category.categorieName}
                 price={price}
                 size={size}
-                onClick={() => {
-                  alert(`Ha clickeado el id ${id}`);
+                onAddCart={() => {
+                  alert(`Ha agregado el id ${id}`);
+                  console.log(price);
                 }}
               />
             </Col>
@@ -67,10 +117,11 @@ function CatalogueShoes(){
           variant="outlined"
           shape="rounded"
           onChange={(e, page) => {
-            //navigate(`/shoes/filter/?trademarkId=${trademarkidPage}&page=${pageParam}`);
+            navigate(`/shoes/filter?trademarkId=${trademarkidPage}&page=${page}`);
           }}
         />
       </div>
+      <br/>
     </Layout>
   );
 }

@@ -1,9 +1,13 @@
-import { StyleWrapper, StyleImage } from './style';
+import { StyleWrapper, StyleImage, StyleButton } from './style';
 import TittleSmall from 'components/Atoms/TittleSmall';
+import AddCart from 'components/Atoms/Icons/AddCartFilled';
 
-const CardShoes = ({image, trademark, model, style, category, price, size, color, onClick}) => {
+const CardShoes = ({image, trademark, model, style, category, price, size, color, onClick, onAddCart}) => {
   return (
     <StyleWrapper onClick={onClick}>
+      <StyleButton labelColor="white" onClick={onAddCart}>
+        <AddCart></AddCart>
+      </StyleButton>
       <StyleImage loading="lazy" src={image} />
       <TittleSmall>Marca: {trademark}</TittleSmall>
       <TittleSmall>Modelo: {model}</TittleSmall>

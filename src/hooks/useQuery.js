@@ -54,3 +54,55 @@ export const useQueryShoes = (url, trademarkidPage, pageParam) => {
 
   return { loading, data, errors, refresh: getData };
 };
+
+export const useQueryWP = (url) => {
+  const [loadingC, setLoading] = useState(true);
+  const [dataC, setData] = useState(null);
+  const [errors, setErrors] = useState(null);
+
+  const getData = useCallback(async () => {
+    setLoading(true);
+    try {
+      const { data } = await axios.get(`${baseUrl}${url}`);
+      setData(data);
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+      setErrors(err);
+      setLoading(false);
+      throw new Error(err);
+    }
+  }, [url]);
+
+  useEffect(() => {
+    getData().then();
+  }, [getData]);
+
+  return { loadingC, dataC, errors, refresh: getData };
+};
+
+export const useQueryWS = (url) => {
+  const [loadingS, setLoading] = useState(true);
+  const [dataS, setData] = useState(null);
+  const [errors, setErrors] = useState(null);
+
+  const getData = useCallback(async () => {
+    setLoading(true);
+    try {
+      const { data } = await axios.get(`${baseUrl}${url}`);
+      setData(data);
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+      setErrors(err);
+      setLoading(false);
+      throw new Error(err);
+    }
+  }, [url]);
+
+  useEffect(() => {
+    getData().then();
+  }, [getData]);
+
+  return { loadingS, dataS, errors, refresh: getData };
+};

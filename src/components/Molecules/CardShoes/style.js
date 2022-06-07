@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Button from '../../Atoms/Button';
 
 export const StyleWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.bgGradiant};
@@ -19,4 +20,17 @@ export const StyleImage = styled.img`
   width: 100%;
   height: 200px;
   object-fit: cover;
+`;
+
+export const StyleButton = styled(Button)`
+  position: absolute;
+  min-width: auto;
+  padding: 0;
+  width:40px;
+  height: 40px;
+  right: 30px;
+  top: 30px;
+  border-radius: 50px;
+  font-size: 14px;
+  z-index: ${({ theme }) => theme.zIndex.two};
 `;
