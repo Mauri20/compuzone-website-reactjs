@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Row, Col } from 'react-grid-system';
 import { useQuery} from 'hooks/useQuery';
 import Title from 'components/Atoms/Tittle';
@@ -6,17 +6,16 @@ import Button from 'components/Atoms/Button';
 import RefreshIcon from '../components/Atoms/Icons/RefreshIcon';
 import Layout from 'components/Organisms/Layout';
 import CardTradeMark from 'components/Molecules/CardTradeMark';
-import {useSearchParams, useNavigate} from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import styled from 'styled-components';
 import Pagination from '@mui/material/Pagination';
 
 function Home() {
   const navigate = useNavigate();
 
-  const [searchParams] = useSearchParams();
-  const paramPage = searchParams.get('page');
+  const [page, setPage] = useState(  1);
 
-  const { data, loading, refresh } = useQuery('/trademark', paramPage);
+  const { data, loading, refresh } = useQuery('/trademark', '', '', '', page);
 
   useEffect(() => {
     //console.log({ data, loading });
@@ -59,7 +58,7 @@ function Home() {
           variant="outlined"
           shape="rounded"
           onChange={(e, page) => {
-            navigate(`/trademark?page=${page}`);
+            setPage(page);
           }}
         />
       </div>

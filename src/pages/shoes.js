@@ -1,26 +1,28 @@
-import { useEffect, useMemo } from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import { Row, Col } from 'react-grid-system';
-import { useQueryShoes, useQueryWP, useQueryWS } from 'hooks/useQuery';
+import { useQuery } from 'hooks/useQuery';
 import Title from 'components/Atoms/Tittle';
 import Button from 'components/Atoms/Button';
-import RefreshIcon from '../components/Atoms/Icons/RefreshIcon';
+import RefreshIcon from 'components/Atoms/Icons/RefreshIcon';
 import Layout from 'components/Organisms/Layout';
 import CardShoes from 'components/Molecules/CardShoes';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Pagination from '@mui/material/Pagination';
 import Select from 'components/Atoms/Select';
 
 function CatalogueShoes(){
-  const navigate = useNavigate();
 
   const [searchParams] = useSearchParams();
   const trademarkidPage = searchParams.get('trademarkId');
-  const pageParam = searchParams.get('page');
 
-  const { data, loading, refresh } = useQueryShoes('/shoes/filter', trademarkidPage, pageParam);
-  const { dataC, loadingC } = useQueryWP('/categories', null);
-  const { dataS, loadingS } = useQueryWS('/styles', null);
+  const [category, setCategory] = useState('');
+  const [style, setStyle] = useState('');
+  const [page, setPage] = useState(  1);
+
+  const { data, loading, refresh } = useQuery('/shoes/filter', trademarkidPage, category, style, page);
+  const { data: dataC, loading: loadingC } = useQuery('/categories', null);
+  const { data: dataS, loading: loadingS } = useQuery('/styles', null);
 
   useEffect(() => {
     //console.log({ dataC, loadingC });
@@ -45,12 +47,22 @@ function CatalogueShoes(){
 
       return {
         value: id,
-        label: styleName
+        label: styleName,
       };
     });
   }, [dataS]);
 
   const totalPages = data?.pageCount || 1;
+
+  const onChangeCategory = (e) => {
+    setCategory(e.value);
+    setPage(1);
+  }
+
+  const onChangeStyle = (e) => {
+    setStyle(e.value);
+    setPage(1);
+  }
 
   return(
     <Layout>
@@ -71,20 +83,22 @@ function CatalogueShoes(){
           name="category"
           options={ dataSelectCategory }
           isLoading={loadingC}
-          placeholder="Category"
+          placeholder="Choose a category"
+          onChange={onChangeCategory}
         />
       </div>
-      <div className="container-select" style={{ textAlign: 'left', display: 'inline-block' }}>
+      <div className="container-select" style={{ textAlign: 'left', display: 'inline-block', marginRight: '15px' }}>
         <Select
           required
           type="text"
           name="style"
           options={ dataSelectStyle }
           isLoading={ loadingS }
-          placeholder="Style"
-          //defaultInputValue={isUpdate ? `${pet?.trainer?.firstName} ${pet?.trainer?.lastName}` : undefined}
+          placeholder="Choose a style"
+          onChange={onChangeStyle}
         />
       </div>
+
       {loading ? (
         <p style={{ textAlign: 'center' }}>
           <b>Loading..</b>
@@ -93,20 +107,20 @@ function CatalogueShoes(){
         <Row>
           {data?.docs?.map(({ id, color, trademark, model, style, category, price, size, url }) => (
             <Col key={id} xs={12} md={6} lg={4}>
-              <CardShoes
-                image={url}
-                trademark={trademark.trademarkName}
-                model={model.modelName}
-                color={color}
-                style={style.styleName}
-                category={category.categorieName}
-                price={price}
-                size={size}
-                onAddCart={() => {
-                  alert(`Ha agregado el id ${id}`);
-                  console.log(price);
-                }}
-              />
+                <CardShoes
+                  image={url}
+                  trademark={trademark.trademarkName}
+                  model={model.modelName}
+                  color={color}
+                  style={style.styleName}
+                  category={category.categorieName}
+                  price={price}
+                  size={size}
+                  onAddCart={() => {
+                    alert(`Ha agregado el id ${id}`);
+                    console.log(price);
+                  }}
+                />
             </Col>
           ))}
         </Row>
@@ -117,7 +131,7 @@ function CatalogueShoes(){
           variant="outlined"
           shape="rounded"
           onChange={(e, page) => {
-            navigate(`/shoes/filter?trademarkId=${trademarkidPage}&page=${page}`);
+            setPage(page);
           }}
         />
       </div>

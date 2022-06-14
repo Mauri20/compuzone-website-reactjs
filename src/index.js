@@ -19,6 +19,7 @@ const AppRenderTheme = memo(() => {
       <Routes>
         <Route path="/trademark" element={<Home />} />
         <Route path="shoes/filter" element={<CatalogueShoes />} />
+        <Route path="*" element={<Home />} />
       </Routes>
     </ThemeProvider>
   );

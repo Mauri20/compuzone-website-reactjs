@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 const baseUrl = `${process.env.REACT_APP_API_URL}/v1`;
 
-export const useQuery = (url, paramsPage) => {
+export const useQuery = (url, trademarkId, categoryId, styleId, page) => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
   const [errors, setErrors] = useState(null);
@@ -11,7 +11,7 @@ export const useQuery = (url, paramsPage) => {
   const getData = useCallback(async () => {
     setLoading(true);
     try {
-      const { data } = await axios.get(`${baseUrl}${url}`, { params: { page: paramsPage } });
+      const { data } = await axios.get(`${baseUrl}${url}`, { params: { trademarkId, categoryId, styleId, page } });
       setData(data);
       setLoading(false);
     } catch (err) {
@@ -20,7 +20,7 @@ export const useQuery = (url, paramsPage) => {
       setLoading(false);
       throw new Error(err);
     }
-  }, [url, paramsPage]);
+  }, [url, trademarkId, categoryId, styleId, page]);
 
   useEffect(() => {
     getData().then();
@@ -29,80 +29,3 @@ export const useQuery = (url, paramsPage) => {
   return { loading, data, errors, refresh: getData };
 };
 
-export const useQueryShoes = (url, trademarkidPage, pageParam) => {
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState(null);
-  const [errors, setErrors] = useState(null);
-
-  const getData = useCallback(async () => {
-    setLoading(true);
-    try {
-      const { data } = await axios.get(`${baseUrl}${url}`, { params: { trademarkId: trademarkidPage, page: pageParam } });
-      setData(data);
-      setLoading(false);
-    } catch (err) {
-      console.log(err);
-      setErrors(err);
-      setLoading(false);
-      throw new Error(err);
-    }
-  }, [url, trademarkidPage, pageParam]);
-
-  useEffect(() => {
-    getData().then();
-  }, [getData]);
-
-  return { loading, data, errors, refresh: getData };
-};
-
-export const useQueryWP = (url) => {
-  const [loadingC, setLoading] = useState(true);
-  const [dataC, setData] = useState(null);
-  const [errors, setErrors] = useState(null);
-
-  const getData = useCallback(async () => {
-    setLoading(true);
-    try {
-      const { data } = await axios.get(`${baseUrl}${url}`);
-      setData(data);
-      setLoading(false);
-    } catch (err) {
-      console.log(err);
-      setErrors(err);
-      setLoading(false);
-      throw new Error(err);
-    }
-  }, [url]);
-
-  useEffect(() => {
-    getData().then();
-  }, [getData]);
-
-  return { loadingC, dataC, errors, refresh: getData };
-};
-
-export const useQueryWS = (url) => {
-  const [loadingS, setLoading] = useState(true);
-  const [dataS, setData] = useState(null);
-  const [errors, setErrors] = useState(null);
-
-  const getData = useCallback(async () => {
-    setLoading(true);
-    try {
-      const { data } = await axios.get(`${baseUrl}${url}`);
-      setData(data);
-      setLoading(false);
-    } catch (err) {
-      console.log(err);
-      setErrors(err);
-      setLoading(false);
-      throw new Error(err);
-    }
-  }, [url]);
-
-  useEffect(() => {
-    getData().then();
-  }, [getData]);
-
-  return { loadingS, dataS, errors, refresh: getData };
-};
