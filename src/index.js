@@ -7,10 +7,11 @@ import CatalogueShoes from 'pages/shoes';
 import GlobalStyle from 'styles/global';
 import { themeLight, themeDark } from 'styles/theme';
 import { AppThemeProvider, useAppTheme } from 'context/AppTheme';
+import { AddItemsProvider } from 'context/AddItemsToCart';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-const AppRenderTheme = memo(() => {
+const App = memo(() => {
   const { theme } = useAppTheme();
 
   return (
@@ -25,19 +26,15 @@ const AppRenderTheme = memo(() => {
   );
 });
 
-const App = () => {
-  return (
-    <AppThemeProvider>
-      <AppRenderTheme />
-    </AppThemeProvider>
-  );
-};
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <AddItemsProvider>
+      <AppThemeProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </AppThemeProvider>
+    </AddItemsProvider>
   </React.StrictMode>
 );

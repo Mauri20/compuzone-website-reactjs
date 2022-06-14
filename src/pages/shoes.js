@@ -1,4 +1,4 @@
-import {useEffect, useMemo, useState} from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Row, Col } from 'react-grid-system';
 import { useQuery } from 'hooks/useQuery';
 import Title from 'components/Atoms/Tittle';
@@ -11,14 +11,20 @@ import styled from 'styled-components';
 import Pagination from '@mui/material/Pagination';
 import Select from 'components/Atoms/Select';
 
-function CatalogueShoes(){
+import { useAddItems } from 'context/AddItemsToCart';
+
+function CatalogueShoes() {
+  const { addItem } = useAddItems();
+
+  // Comentario para obtener el valor del array de productos en el localStorage
+  //console.log(products, total);
 
   const [searchParams] = useSearchParams();
   const trademarkidPage = searchParams.get('trademarkId');
 
   const [category, setCategory] = useState('');
   const [style, setStyle] = useState('');
-  const [page, setPage] = useState(  1);
+  const [page, setPage] = useState(1);
 
   const { data, loading, refresh } = useQuery('/shoes/filter', trademarkidPage, category, style, page);
   const { data: dataC, loading: loadingC } = useQuery('/categories', null);
@@ -47,7 +53,7 @@ function CatalogueShoes(){
 
       return {
         value: id,
-        label: styleName,
+        label: styleName
       };
     });
   }, [dataS]);
@@ -57,31 +63,31 @@ function CatalogueShoes(){
   const onChangeCategory = (e) => {
     setCategory(e.value);
     setPage(1);
-  }
+  };
 
   const onChangeStyle = (e) => {
     setStyle(e.value);
     setPage(1);
-  }
+  };
 
-  return(
+  return (
     <Layout>
       <Title htmlTag="h1" size={75}>
         Catálogo de Zapatos
       </Title>
-      <br/>
+      <br />
       <div className="container-btn" style={{ textAlign: 'center' }}>
         <Button onClick={refresh}>
           <RefreshIcon></RefreshIcon>
         </Button>
       </div>
-      <br/>
+      <br />
       <div className="container-select" style={{ textAlign: 'left', display: 'inline-block', marginRight: '15px' }}>
         <Select
           required
           type="text"
           name="category"
-          options={ dataSelectCategory }
+          options={dataSelectCategory}
           isLoading={loadingC}
           placeholder="Choose a category"
           onChange={onChangeCategory}
@@ -92,8 +98,8 @@ function CatalogueShoes(){
           required
           type="text"
           name="style"
-          options={ dataSelectStyle }
-          isLoading={ loadingS }
+          options={dataSelectStyle}
+          isLoading={loadingS}
           placeholder="Choose a style"
           onChange={onChangeStyle}
         />
@@ -105,8 +111,10 @@ function CatalogueShoes(){
         </p>
       ) : (
         <Row>
-          {data?.docs?.map(({ id, color, trademark, model, style, category, price, size, url }) => (
-            <Col key={id} xs={12} md={6} lg={4}>
+          {data?.docs?.map((product) => {
+            const { id, color, trademark, model, style, category, price, size, url } = product;
+            return (
+              <Col key={id} xs={12} md={6} lg={4}>
                 <CardShoes
                   image={url}
                   trademark={trademark.trademarkName}
@@ -117,12 +125,13 @@ function CatalogueShoes(){
                   price={price}
                   size={size}
                   onAddCart={() => {
-                    alert(`Ha agregado el id ${id}`);
-                    console.log(price);
+                    alert(`Ha agregado el id ${id} de la marca ${trademark.trademarkName} al carrito`);
+                    addItem(product, 1);
                   }}
                 />
-            </Col>
-          ))}
+              </Col>
+            );
+          })}
         </Row>
       )}
       <div className="container-btn" style={{ justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
@@ -135,7 +144,7 @@ function CatalogueShoes(){
           }}
         />
       </div>
-      <br/>
+      <br />
     </Layout>
   );
 }
@@ -146,23 +155,27 @@ const StyledPagination = styled(Pagination)`
       color: ${({ theme }) => theme.colors.text};
       border-color: ${({ theme }) => theme.colors.text};
       font-size: 20px;
+
       &:hover {
         background: ${({ theme }) => theme.colors.secondary};
       }
     }
-.MuiPaginationItem-previousNext {
+
+    .MuiPaginationItem-previousNext {
       color: ${({ theme }) => theme.colors.text};
       border-color ${({ theme }) => theme.colors.text};
+
       &:hover {
         background: ${({ theme }) => theme.colors.secondary};
       }
     }
+
     .Mui-selected {
       background: ${({ theme }) => theme.colors.secondary};
+
       &:hover {
         background: ${({ theme }) => theme.colors.background};
       }
     }`;
-
 
 export default CatalogueShoes;

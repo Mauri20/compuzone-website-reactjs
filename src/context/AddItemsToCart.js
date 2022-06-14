@@ -1,4 +1,4 @@
-import {createContext, useContext, useEffect, useState} from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import storage from 'utils/storage';
 
 const AddItemsContext = createContext({
@@ -8,7 +8,7 @@ const AddItemsContext = createContext({
   removeItem: () => {}
 });
 
-const KEY_PRODUCTS_NAME = 'product';
+const KEY_PRODUCTS_NAME = 'products';
 
 export const AddItemsProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
@@ -16,30 +16,40 @@ export const AddItemsProvider = ({ children }) => {
 
   const addItem = (product, quantity) => {
     const subT = Number(product.price * quantity).toFixed(2);
-    const findP = products.findIndex(p => p.id === product.id)
-    if(findP !== -1){
-      products[findP] = {...product, quantity, subTotal: subT}
-      console.log("ya hay producto")
-    }else{
-      products.push({...product, quantity, subTotal: subT})
-      console.log("no hay producto")
-    }
-  }
+
+    setProducts((_products) => {
+      const findIndexProduct = _products.findIndex((p) => p.id === product.id);
+      if (findIndexProduct !== -1) {
+        _products[findIndexProduct] = { ...product, quantity, subTotal: subT };
+        //console.log('Ya esta agregado');
+      } else {
+        _products.push({ ...product, quantity, subTotal: subT });
+        //console.log('Agregado');
+      }
+      storage.setItem(KEY_PRODUCTS_NAME, products);
+      return _products;
+    });
+  };
 
   useEffect(() => {
-    const _total = products.reduce((prev, current) => prev += current?.subTotal, 0);
-    setTotal(_total.toFixed(2));
+    const _total = products.reduce((prev, current) => prev + Number(current?.subTotal), 0);
+    setTotal(_total?.toFixed(2));
   }, [products]);
 
-  const removeItem = (id) => {;
-    setProducts(products => products.filter(p => p.id !== id));
-  }
+  useEffect(() => {
+    const _products = storage.getItem(KEY_PRODUCTS_NAME);
+    if (typeof _products === 'object' && _products?.length) {
+      setProducts(_products);
+    }
+  }, []);
+
+  const removeItem = (id) => {
+    setProducts((products) => products.filter((p) => p.id !== id));
+  };
 
   return (
-    <AddItemsContext.Provider value={{  products, total, addItem, removeItem }}>
-      {children}
-    </AddItemsContext.Provider>
-  )
+    <AddItemsContext.Provider value={{ products, total, addItem, removeItem }}>{children}</AddItemsContext.Provider>
+  );
 };
 
-export const useAddItems = () => useContext(AddItemsContext)
+export const useAddItems = () => useContext(AddItemsContext);
