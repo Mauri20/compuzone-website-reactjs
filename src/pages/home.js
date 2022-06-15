@@ -6,7 +6,7 @@ import Button from 'components/Atoms/Button';
 import RefreshIcon from '../components/Atoms/Icons/RefreshIcon';
 import Layout from 'components/Organisms/Layout';
 import CardTradeMark from 'components/Molecules/CardTradeMark';
-import { useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Pagination from '@mui/material/Pagination';
 

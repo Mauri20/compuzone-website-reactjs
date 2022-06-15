@@ -125,7 +125,7 @@ function CatalogueShoes() {
                   price={price}
                   size={size}
                   onAddCart={() => {
-                    alert(`Ha agregado el id ${id} de la marca ${trademark.trademarkName} al carrito`);
+                    //alert(`Ha agregado el id ${id} de la marca ${trademark.trademarkName} al carrito`);
                     addItem(product, 1);
                   }}
                 />

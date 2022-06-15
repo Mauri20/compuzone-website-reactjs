@@ -22,9 +22,11 @@ export const AddItemsProvider = ({ children }) => {
       if (findIndexProduct !== -1) {
         _products[findIndexProduct] = { ...product, quantity, subTotal: subT };
         //console.log('Ya esta agregado');
+        alert('¡YA HA SIDO AGREGADO AL CARRITO!')
       } else {
         _products.push({ ...product, quantity, subTotal: subT });
         //console.log('Agregado');
+        alert('¡AGREGADO AL CARRITO!')
       }
       storage.setItem(KEY_PRODUCTS_NAME, products);
       return _products;
