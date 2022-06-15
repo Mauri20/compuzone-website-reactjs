@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { useCallback, useEffect, useState } from 'react';
+import config from 'config';
 
-const baseUrl = `${process.env.REACT_APP_API_URL}/v1`;
+const { baseUrl } = config;
+
 
 export const useQuery = (url, trademarkId, categoryId, styleId, page) => {
   const [loading, setLoading] = useState(true);
