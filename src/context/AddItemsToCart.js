@@ -17,18 +17,20 @@ export const AddItemsProvider = ({ children }) => {
   const addItem = (product, quantity) => {
     const subT = Number(product.price * quantity).toFixed(2);
 
-    setProducts((_products) => {
+    setProducts((prev) => {
+      const _products = [...prev];
       const findIndexProduct = _products.findIndex((p) => p.id === product.id);
       if (findIndexProduct !== -1) {
         _products[findIndexProduct] = { ...product, quantity, subTotal: subT };
         //console.log('Ya esta agregado');
-        alert('¡YA HA SIDO AGREGADO AL CARRITO!')
+        //alert('¡YA HA SIDO AGREGADO AL CARRITO!')
       } else {
         _products.push({ ...product, quantity, subTotal: subT });
         //console.log('Agregado');
-        alert('¡AGREGADO AL CARRITO!')
+        //alert('¡AGREGADO AL CARRITO!')
       }
-      storage.setItem(KEY_PRODUCTS_NAME, products);
+      storage.setItem(KEY_PRODUCTS_NAME, _products);
+      console.log( _products );
       return _products;
     });
   };

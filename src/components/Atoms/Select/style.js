@@ -13,4 +13,8 @@ export const StyleSelect = styled(ReactSelect)`
     background: ${({ theme }) => theme.colors.input};
     box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.shadowInput};
   }
+
+  .react-select__value-container {
+    color: ${({ theme }) => theme.colors.text};
+  }
 `;

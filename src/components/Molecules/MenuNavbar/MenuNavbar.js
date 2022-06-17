@@ -5,10 +5,15 @@ import ProfileFilled from 'components/Atoms/Icons/ProfileFilled';
 import CartShoppingFilled from 'components/Atoms/Icons/CartShopping';
 import { StyleMenuItem, StyleMenuNavbar } from './style';
 import { useAddItems } from 'context/AddItemsToCart';
+import {useEffect} from 'react';
 
 const MenuNavbar = () => {
   const { themeToggle, theme } = useAppTheme();
   const { products } = useAddItems();
+
+  useEffect(() => {
+    console.log({ products });
+  }, [products]);
 
   return (
     <StyleMenuNavbar>
