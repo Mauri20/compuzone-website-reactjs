@@ -35,7 +35,7 @@ function Home() {
       </div>
       {loading ? (
         <p style={{ textAlign: 'center' }}>
-          <b>Loading..</b>
+          <b>Loading...</b>
         </p>
       ) : (
         <Row>
@@ -45,7 +45,7 @@ function Home() {
                 name={trademarkName}
                 image={urlImage}
                 onClick={() => {
-                  navigate(`/shoes/filter?trademarkId=${id}`);
+                  navigate(`/shoes/filter?trademarkId=${id}&name=${trademarkName}`);
                 }}
               />
             </Col>
