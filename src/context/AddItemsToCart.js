@@ -30,7 +30,7 @@ export const AddItemsProvider = ({ children }) => {
         //alert('¡AGREGADO AL CARRITO!')
       }
       storage.setItem(KEY_PRODUCTS_NAME, _products);
-      console.log( _products );
+      //console.log( _products );
       return _products;
     });
   };
@@ -48,7 +48,15 @@ export const AddItemsProvider = ({ children }) => {
   }, []);
 
   const removeItem = (id) => {
-    setProducts((products) => products.filter((p) => p.id !== id));
+    setProducts((prev) => {
+      const _products = [...prev];
+      const findIndexProduct = _products.findIndex((p) => p.id === id);
+      if (findIndexProduct !== -1) {
+        _products.splice(findIndexProduct, 1);
+      }
+      storage.setItem(KEY_PRODUCTS_NAME, _products);
+      return _products;
+    });
   };
 
   return (

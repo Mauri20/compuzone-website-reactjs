@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Row, Col } from 'react-grid-system';
-import { useQuery} from 'hooks/useQuery';
+import { useQuery } from 'hooks/useQuery';
 import Title from 'components/Atoms/Tittle';
 import Button from 'components/Atoms/Button';
 import RefreshIcon from '../components/Atoms/Icons/RefreshIcon';
@@ -13,7 +13,7 @@ import Pagination from '@mui/material/Pagination';
 function Home() {
   const navigate = useNavigate();
 
-  const [page, setPage] = useState(  1);
+  const [page, setPage] = useState(1);
 
   const { data, loading, refresh } = useQuery('/trademark', '', '', '', page);
 
@@ -25,9 +25,10 @@ function Home() {
 
   return (
     <Layout>
-      <Title htmlTag="h1" size={75}>
-        Available Trademarks
+      <Title htmlTag="h1" size={70}>
+        Welcome to ZeligStore!
       </Title>
+      <br />
       <div className="container-btn" style={{ textAlign: 'center' }}>
         <Button onClick={refresh}>
           <RefreshIcon></RefreshIcon>
@@ -62,6 +63,7 @@ function Home() {
           }}
         />
       </div>
+      <br />
     </Layout>
   );
 }

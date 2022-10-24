@@ -13,6 +13,6 @@ export const ROUTES = {
     path: '/shoes/filter',
     absolutePath: 'shoes/filter'
   }
-}
+};
 
 export default config;

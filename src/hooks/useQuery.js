@@ -4,7 +4,6 @@ import config from 'config';
 
 const { baseUrl } = config;
 
-
 export const useQuery = (url, trademarkId, categoryId, styleId, page) => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
@@ -30,4 +29,3 @@ export const useQuery = (url, trademarkId, categoryId, styleId, page) => {
 
   return { loading, data, errors, refresh: getData };
 };
-

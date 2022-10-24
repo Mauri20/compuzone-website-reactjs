@@ -15,7 +15,7 @@ const App = memo(() => {
   return (
     <ThemeProvider theme={theme === 'light' ? themeLight : themeDark}>
       <GlobalStyle />
-      <Routes/>
+      <Routes />
     </ThemeProvider>
   );
 });
@@ -25,7 +25,7 @@ root.render(
   <React.StrictMode>
     <AddItemsProvider>
       <AppThemeProvider>
-          <App />
+        <App />
       </AppThemeProvider>
     </AddItemsProvider>
   </React.StrictMode>
