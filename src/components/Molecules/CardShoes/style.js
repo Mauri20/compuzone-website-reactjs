@@ -18,7 +18,7 @@ export const StyleWrapper = styled.div`
 export const StyleImage = styled.img`
   border-radius: 12px;
   width: 100%;
-  height: 200px;
+  height: 400px;
   object-fit: cover;
 `;
 
@@ -26,7 +26,7 @@ export const StyleButton = styled(Button)`
   position: absolute;
   min-width: auto;
   padding: 0;
-  width:40px;
+  width: 40px;
   height: 40px;
   right: 30px;
   top: 30px;

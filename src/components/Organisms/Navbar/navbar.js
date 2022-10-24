@@ -1,5 +1,5 @@
 import MenuNavbar from 'components/Molecules/MenuNavbar';
-import TitleRedirected from 'components/Atoms/TittleWithRedirection'
+import TitleRedirected from 'components/Atoms/TittleWithRedirection';
 import { useNavigate } from 'react-router-dom';
 import { StyleNavbar } from './style';
 
@@ -8,7 +8,14 @@ const Navbar = () => {
 
   return (
     <StyleNavbar>
-      <TitleRedirected color="secondary" onClick={() => { navigate(`/trademark`);}}>ZeligStore</TitleRedirected>
+      <TitleRedirected
+        color="secondary"
+        onClick={() => {
+          navigate(`/trademark`);
+        }}
+      >
+        ZeligStore
+      </TitleRedirected>
       <MenuNavbar />
     </StyleNavbar>
   );
