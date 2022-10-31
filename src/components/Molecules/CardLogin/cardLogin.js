@@ -13,8 +13,8 @@ const CardLogin = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     //sending the data to the backend
-    //const url = 'http://localhost:8080';
-    const url = 'https://zeligstore-api-nodejs-production-e0d5.up.railway.app';
+    const url = 'http://localhost:8080';
+    //const url = 'https://zeligstore-api-nodejs-production-e0d5.up.railway.app';
     const response = await fetch(url + '/v1/users/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -23,6 +23,7 @@ const CardLogin = () => {
     const data = await response.json();
 
     if (data.status === 'ok') {
+      localStorage.setItem('token', data.token); //saving the token in the local storage
       Swal.fire({
         title: 'Wellcome!',
         text: data.message,
@@ -64,6 +65,7 @@ const CardLogin = () => {
                 onChange={(e) => setUser(e.target.value)}
                 placeholder="Escriba su Usuario"
                 required=""
+                autoFocus
               />
               <input
                 type="password"

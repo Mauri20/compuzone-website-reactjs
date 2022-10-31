@@ -6,10 +6,19 @@ import CartShoppingFilled from 'components/Atoms/Icons/CartShopping';
 import { StyleMenuItem, StyleMenuNavbar } from './style';
 import { useAddItems } from 'context/AddItemsToCart';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const MenuNavbar = () => {
+  const token = localStorage.getItem('token');
   const { themeToggle, theme } = useAppTheme();
   const { products } = useAddItems();
+  const navigate = useNavigate();
+  let handleNavigate;
+  if (token) {
+    handleNavigate = () => navigate('/users/trademarks');
+  } else {
+    handleNavigate = () => navigate('/users/login');
+  }
 
   useEffect(() => {
     //console.log({ products });
@@ -24,8 +33,8 @@ const MenuNavbar = () => {
         <CartShoppingFilled />
         <span>{products.length}</span>
       </StyleMenuItem>
-      <StyleMenuItem color="transparent" labelColor="text">
-        <ProfileFilled />
+      <StyleMenuItem color="transparent" labelColor="text" onClick={handleNavigate}>
+        {token ? <ProfileFilled /> : <CartShoppingFilled />}
       </StyleMenuItem>
     </StyleMenuNavbar>
   );
