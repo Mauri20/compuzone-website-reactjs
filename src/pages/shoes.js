@@ -28,7 +28,7 @@ function CatalogueShoes() {
   const [style, setStyle] = useState('');
   const [page, setPage] = useState(1);
 
-  const { data, loading, refresh } = useQuery('/shoes/filter', trademarkidPage, category, style, page);
+  const { data, loading, refresh } = useQuery('/shoes/filter', trademarkidPage, category, style, '',page);
   const { data: dataC, loading: loadingC } = useQuery('/categories', null);
   const { data: dataS, loading: loadingS } = useQuery('/styles', null);
 

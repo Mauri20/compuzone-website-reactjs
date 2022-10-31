@@ -15,7 +15,7 @@ export const StyleMenuNavbar = styled.div`
 export const StyleMenuItem = styled(Button)`
   margin-right: 10px;
   min-width: auto;
-  padding: 0 10px;
+  padding: 0 5px;
   transition: color 0.3s;
   font-weight: 700;
 
