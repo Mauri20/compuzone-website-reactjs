@@ -13,7 +13,9 @@ const CardLogin = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     //sending the data to the backend
-    const response = await fetch('http://localhost:8080/v1/users/login', {
+    //const url="http://localhost:8080";
+    const url = 'https://zeligstore-api-nodejs-production-e0d5.up.railway.app';
+    const response = await fetch(url + '/v1/users/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ user, password }) //sending the data to the backend
