@@ -15,7 +15,7 @@ function Home() {
 
   const [page, setPage] = useState(1);
 
-  const { data, loading, refresh } = useQuery('/trademark', '', '', '', page);
+  const { data, loading, refresh } = useQuery('/trademark', '', '', '', '',page);
 
   useEffect(() => {
     //console.log({ data, loading });
