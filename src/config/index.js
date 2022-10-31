@@ -12,6 +12,14 @@ export const ROUTES = {
   SHOES: {
     path: '/shoes/filter',
     absolutePath: 'shoes/filter'
+  },
+  LOGIN: {
+    path: 'users/login',
+    absolutePath: 'users/login'
+  },
+  REGISTERLOGIN: {
+    path: 'users/registerlogin',
+    absolutePath: 'users/registerlogin'
   }
 };
 
