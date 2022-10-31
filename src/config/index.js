@@ -12,6 +12,10 @@ export const ROUTES = {
   SHOES: {
     path: '/shoes/filter',
     absolutePath: 'shoes/filter'
+  },
+  CART: {
+    path: '/cart',
+    absolutePath: '/cart'
   }
 };
 
