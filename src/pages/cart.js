@@ -18,11 +18,11 @@ function Cart(){
   const [page, setPage] = useState(1);
 
   //Getting the data from the localStorage
-  const products = JSON.parse(localStorage.getItem('products'));
+  const productsCart = JSON.parse(localStorage.getItem('products'));
   //Array of products
   let ArrayID = [];
   //Adding the id of the products to the array
-  products?.map((item) => {
+  productsCart?.map((item) => {
     const { id } = item;
     ArrayID.push(id);
   });
@@ -30,10 +30,10 @@ function Cart(){
   const { data, loading, refresh } = useQuery('/shoes/filter', '', '', '', ArrayID, page);
 
   //Calculating the total of the purchase
-  const total = products?.reduce((prev, current) => prev + Number(current?.subTotal), 0);
+  const total = productsCart?.reduce((prev, current) => prev + Number(current?.subTotal), 0);
   const total2 = total?.toFixed(2);
   //Calculating the total of the products
-  const totalItems = products?.reduce((prev, current) => prev + Number(current?.quantity), 0);
+  const totalItems = productsCart?.reduce((prev, current) => prev + Number(current?.quantity), 0);
   const totalItems2 = totalItems?.toFixed(0);
   //Calculating the total of the pages
   const totalPages = data?.pageCount || 1;
