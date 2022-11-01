@@ -5,7 +5,8 @@ const AddItemsContext = createContext({
   products: [],
   total: 0,
   addItem: () => {},
-  removeItem: () => {}
+  removeItem: () => {},
+  removeAll: () => {}
 });
 
 const KEY_PRODUCTS_NAME = 'products';
@@ -59,8 +60,17 @@ export const AddItemsProvider = ({ children }) => {
     });
   };
 
+  const removeAll = () => {
+    setProducts((prev) => {
+      const _products = [...prev];
+      _products.splice(0, _products.length);
+      storage.setItem(KEY_PRODUCTS_NAME, _products);
+      return _products;
+    });
+  };
+
   return (
-    <AddItemsContext.Provider value={{ products, total, addItem, removeItem }}>{children}</AddItemsContext.Provider>
+    <AddItemsContext.Provider value={{ products, total, addItem, removeItem, removeAll }}>{children}</AddItemsContext.Provider>
   );
 };
 

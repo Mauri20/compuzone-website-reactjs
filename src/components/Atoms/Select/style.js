@@ -17,4 +17,17 @@ export const StyleSelect = styled(ReactSelect)`
   .react-select__value-container {
     color: ${({ theme }) => theme.colors.text};
   }
+
+  .react-select__option {
+    color: ${({ theme }) => theme.colors.text};
+    background: ${({ theme }) => theme.colors.input};
+  }
+
+  .react-select__option--is-focused {
+    background: ${({ theme }) => theme.colors.secondary};
+  }
+
+  .react-select__option--is-selected {
+    background: ${({ theme }) => theme.colors.secondary};
+  }
 `;
