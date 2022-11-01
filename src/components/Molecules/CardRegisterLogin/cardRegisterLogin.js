@@ -86,7 +86,7 @@ const CardRegisterLogin = () => {
                 name=""
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                placeholder="Formato: 88888888" //This pattern is for the phone number format
+                placeholder="Tel&eacute;fono: 88888888" //This pattern is for the phone number format
                 required
               />
               <input
