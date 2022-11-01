@@ -8,6 +8,8 @@ import { StyleMenuItem, StyleMenuNavbar } from './style';
 import { useAddItems } from 'context/AddItemsToCart';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import LogoutIcon from 'components/Atoms/Icons/LogoutFilled';
+import Swal from 'sweetalert2';
 
 const MenuNavbar = () => {
   const token = localStorage.getItem('token');
@@ -16,10 +18,72 @@ const MenuNavbar = () => {
   const navigate = useNavigate();
 
   let handleNavigate;
-  if (token) {
-    handleNavigate = () => navigate('/users/trademarks');
+  if (!token) {
+    handleNavigate = () => {
+      Swal.fire({
+        title: 'Info!',
+        text: 'Have you created your profile?',
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: 'Info!',
+            text: 'You will be redirected to the login page',
+            icon: 'info',
+            confirmButtonText: 'Ok'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate('/users/login');
+            }
+          });
+        }
+        if (result.dismiss === 'cancel') {
+          Swal.fire({
+            title: 'Info!',
+            text: 'You will be redirected to creating profile page',
+            icon: 'info',
+            confirmButtonText: 'Ok'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate('/users/registerlogin');
+            }
+          });
+        }
+      });
+    };
   } else {
-    handleNavigate = () => navigate('/users/login');
+    handleNavigate = () => {
+      // informing the user that will close the session if he/she is not logged in
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'If you close the session you will lose the items in your cart',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          localStorage.removeItem('token');
+          Swal.fire({
+            title: '¡Bye!',
+            text: 'You have closed the session',
+            icon: 'success',
+            confirmButtonText: 'Ok'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate('/trademarks');
+            }
+          });
+        }
+      });
+    };
   }
 
   useEffect(() => {
@@ -51,7 +115,7 @@ const MenuNavbar = () => {
         <span>{products.length}</span>
       </StyleMenuItem>
       <StyleMenuItem color="transparent" labelColor="text" onClick={handleNavigate}>
-        {token ? <ProfileFilled /> : <CartShoppingFilled />}
+        {token ? <LogoutIcon /> : <ProfileFilled />}
       </StyleMenuItem>
     </StyleMenuNavbar>
   );
