@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
 const MenuNavbar = () => {
   const token = localStorage.getItem('token');
   const { themeToggle, theme } = useAppTheme();
-  const { products } = useAddItems();
+  const { products, removeAll } = useAddItems();
   const navigate = useNavigate();
 
   let handleNavigate;
@@ -71,6 +71,7 @@ const MenuNavbar = () => {
       }).then((result) => {
         if (result.isConfirmed) {
           localStorage.removeItem('token');
+          removeAll();
           Swal.fire({
             title: '¡Bye!',
             text: 'You have closed the session',

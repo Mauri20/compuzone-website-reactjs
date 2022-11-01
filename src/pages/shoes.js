@@ -72,6 +72,12 @@ function CatalogueShoes() {
     setPage(1);
   };
 
+  const onClearFilters = (e) => {
+    setCategory(e.value = '');
+    setStyle(e.value = '');
+    setPage(1);
+  };
+
   return (
     <Layout>
       <Title htmlTag="h1" size={75}>
@@ -105,6 +111,9 @@ function CatalogueShoes() {
           placeholder="Choose a style"
           onChange={onChangeStyle}
         />
+      </div>
+      <div className="container-select" style={{ textAlign: 'left', display: 'inline-block', marginRight: '15px' }}>
+        <Button onClick={onClearFilters} style={{background: '#46B98C'}}>Clear filters</Button>
       </div>
 
       {loading ? (
