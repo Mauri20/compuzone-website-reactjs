@@ -82,11 +82,11 @@ const CardRegisterLogin = () => {
               />
               <input
                 type="tel"
-                pattern="\d{4}[-]\d{4}" //This pattern is for the phone number format
+                pattern="\d{8}" //This pattern is for the phone number format
                 name=""
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                placeholder="N&uacute;mero de Tel&eacute;fono"
+                placeholder="Formato: 88888888" //This pattern is for the phone number format
                 required
               />
               <input
