@@ -7,15 +7,19 @@ import RefreshIcon from '../components/Atoms/Icons/RefreshIcon';
 import PayIcon from 'components/Atoms/Icons/PayFilled';
 import {Col, Row} from 'react-grid-system';
 import CardShoes from '../components/Molecules/CardShoes';
-
 import { useAddItems } from 'context/AddItemsToCart';
 import styled from 'styled-components';
 import Pagination from '@mui/material/Pagination';
 
 function Cart(){
 
-  const { addItem, removeItem } = useAddItems();
+  const { addItem, removeItem, removeAll } = useAddItems();
   const [page, setPage] = useState(1);
+
+  function redirectPaypal() {
+    window.location.href = 'https://www.paypal.com/sv/signin';
+    removeAll();
+  }
 
   //Getting the data from the localStorage
   const productsCart = JSON.parse(localStorage.getItem('products'));
@@ -50,7 +54,7 @@ function Cart(){
         <Button onClick={refresh}>
           <RefreshIcon></RefreshIcon>
         </Button>
-        <Button style={{marginLeft: '4px', background:'#46B98C'}}>
+        <Button style={{marginLeft: '4px', background:'#46B98C'}} onClick={() => {redirectPaypal()}}>
           <PayIcon></PayIcon>
         </Button>
       </div>
