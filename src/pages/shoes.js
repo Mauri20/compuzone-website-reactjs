@@ -4,6 +4,8 @@ import { useQuery } from 'hooks/useQuery';
 import Title from 'components/Atoms/Tittle';
 import Button from 'components/Atoms/Button';
 import RefreshIcon from 'components/Atoms/Icons/RefreshIcon';
+import ClearFilterIcon from 'components/Atoms/Icons/ClearFilterFilled';
+import ReturnIcon from 'components/Atoms/Icons/ReturnFilled';
 import Layout from 'components/Organisms/Layout';
 import CardShoes from 'components/Molecules/CardShoes';
 import { useSearchParams } from 'react-router-dom';
@@ -78,6 +80,10 @@ function CatalogueShoes() {
     setPage(1);
   };
 
+  const back = () => {
+    window.history.back();
+  };
+
   return (
     <Layout>
       <Title htmlTag="h1" size={75}>
@@ -85,7 +91,10 @@ function CatalogueShoes() {
       </Title>
       <br />
       <div className="container-btn" style={{ textAlign: 'center' }}>
-        <Button onClick={refresh}>
+        <Button onClick={() => {back()}} style={{background: '#4F5B67'}}>
+          <ReturnIcon></ReturnIcon>
+        </Button>
+        <Button onClick={refresh} style={{marginLeft: '5px'}}>
           <RefreshIcon></RefreshIcon>
         </Button>
       </div>
@@ -113,7 +122,10 @@ function CatalogueShoes() {
         />
       </div>
       <div className="container-select" style={{ textAlign: 'left', display: 'inline-block', marginRight: '15px' }}>
-        <Button onClick={onClearFilters} style={{background: '#46B98C'}}>Clear filters</Button>
+        <Button onClick={onClearFilters} style={{background: '#F25665'}}>
+          <ClearFilterIcon></ClearFilterIcon>
+          Limpiar filtros
+        </Button>
       </div>
 
       {loading ? (

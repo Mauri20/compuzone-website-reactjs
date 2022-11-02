@@ -26,7 +26,7 @@ const CardLogin = () => {
     if (data.status === 'ok') {
       localStorage.setItem('token', data.token); //saving the token in the local storage
       Swal.fire({
-        title: 'Wellcome!',
+        title: '¡Bienvenido!',
         text: data.message,
         icon: 'success',
         confirmButtonText: 'Ok'
