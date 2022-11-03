@@ -5,7 +5,7 @@ import Home from 'pages/home';
 import Login from 'pages/login';
 import RegisterLogin from 'pages/registerlogin';
 import CatalogueShoes from 'pages/shoes';
-import Cart from 'pages/cart'
+import Cart from 'pages/cart';
 
 const Routes = () => {
   return (

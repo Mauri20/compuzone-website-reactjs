@@ -30,7 +30,7 @@ function CatalogueShoes() {
   const [style, setStyle] = useState('');
   const [page, setPage] = useState(1);
 
-  const { data, loading, refresh } = useQuery('/shoes/filter', trademarkidPage, category, style, '',page);
+  const { data, loading, refresh } = useQuery('/shoes/filter', trademarkidPage, category, style, '', page);
   const { data: dataC, loading: loadingC } = useQuery('/categories', null);
   const { data: dataS, loading: loadingS } = useQuery('/styles', null);
 
@@ -75,8 +75,8 @@ function CatalogueShoes() {
   };
 
   const onClearFilters = (e) => {
-    setCategory(e.value = '');
-    setStyle(e.value = '');
+    setCategory((e.value = ''));
+    setStyle((e.value = ''));
     setPage(1);
   };
 
@@ -91,10 +91,15 @@ function CatalogueShoes() {
       </Title>
       <br />
       <div className="container-btn" style={{ textAlign: 'center' }}>
-        <Button onClick={() => {back()}} style={{background: '#4F5B67'}}>
+        <Button
+          onClick={() => {
+            back();
+          }}
+          style={{ background: '#4F5B67' }}
+        >
           <ReturnIcon></ReturnIcon>
         </Button>
-        <Button onClick={refresh} style={{marginLeft: '5px'}}>
+        <Button onClick={refresh} style={{ marginLeft: '5px' }}>
           <RefreshIcon></RefreshIcon>
         </Button>
       </div>
@@ -122,7 +127,7 @@ function CatalogueShoes() {
         />
       </div>
       <div className="container-select" style={{ textAlign: 'left', display: 'inline-block', marginRight: '15px' }}>
-        <Button onClick={onClearFilters} style={{background: '#F25665'}}>
+        <Button onClick={onClearFilters} style={{ background: '#F25665' }}>
           <ClearFilterIcon></ClearFilterIcon>
           Limpiar filtros
         </Button>
@@ -135,13 +140,13 @@ function CatalogueShoes() {
       ) : (
         <Row>
           {data?.docs?.map((product) => {
-            const { id, color, trademark, model, style, category, price, size, url } = product;
+            const { id, color, trademark, model, style, category, price, size, image } = product;
             return (
               <Col key={id} xs={12} md={6} lg={4}>
                 <CardShoes
-                  image={url}
+                  image={image.secure_url}
                   trademark={trademark.trademarkName}
-                  model={model.modelName}
+                  model={model}
                   color={color}
                   style={style.styleName}
                   category={category.categorieName}

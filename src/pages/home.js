@@ -15,7 +15,7 @@ function Home() {
 
   const [page, setPage] = useState(1);
 
-  const { data, loading, refresh } = useQuery('/trademark', '', '', '', '',page);
+  const { data, loading, refresh } = useQuery('/trademark', '', '', '', '', page);
 
   useEffect(() => {
     //console.log({ data, loading });
@@ -26,7 +26,7 @@ function Home() {
   return (
     <Layout>
       <Title htmlTag="h1" size={70}>
-        Welcome to ZeligStore!
+        ¡Bienvenido a ZeligStore!
       </Title>
       <br />
       <div className="container-btn" style={{ textAlign: 'center' }}>
@@ -34,17 +34,18 @@ function Home() {
           <RefreshIcon></RefreshIcon>
         </Button>
       </div>
+      <br />
       {loading ? (
         <p style={{ textAlign: 'center' }}>
           <b>Loading...</b>
         </p>
       ) : (
         <Row>
-          {data?.docs.map(({ id, trademarkName, urlImage }) => (
+          {data?.docs.map(({ id, trademarkName, image }) => (
             <Col key={id} xs={12} md={6} lg={4}>
               <CardTradeMark
                 name={trademarkName}
-                image={urlImage}
+                image={image.secure_url}
                 onClick={() => {
                   navigate(`/shoes/filter?trademarkId=${id}&name=${trademarkName}`);
                 }}

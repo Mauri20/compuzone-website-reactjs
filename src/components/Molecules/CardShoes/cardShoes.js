@@ -16,9 +16,9 @@ const CardShoes = ({ image, trademark, model, style, category, price, size, colo
         {isAdd ? <RemoveCart></RemoveCart> : <AddCart></AddCart>}
       </StyleButton>
       <StyleImage loading="lazy" src={image} />
-      <TittleSmall>Modelo: {model}</TittleSmall>
-      <TittleSmall>Precio: ${price}</TittleSmall>
-      <TittleSmall>Talla disponible: {size}</TittleSmall>
+      <TittleSmall>{model}</TittleSmall>
+      <TittleSmall>Talla: {size}</TittleSmall>
+      <TittleSmall style={{ textAlign: 'right', fontSize: '30px', fontStyle: 'bold' }}>${price}</TittleSmall>
     </StyleWrapper>
   );
 };

@@ -1,18 +1,17 @@
 import Layout from 'components/Organisms/Layout';
 import Title from '../components/Atoms/Tittle';
 import { useQuery } from 'hooks/useQuery';
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import Button from '../components/Atoms/Button';
 import RefreshIcon from '../components/Atoms/Icons/RefreshIcon';
 import PayIcon from 'components/Atoms/Icons/PayFilled';
-import {Col, Row} from 'react-grid-system';
+import { Col, Row } from 'react-grid-system';
 import CardShoes from '../components/Molecules/CardShoes';
 import { useAddItems } from 'context/AddItemsToCart';
 import styled from 'styled-components';
 import Pagination from '@mui/material/Pagination';
 
-function Cart(){
-
+function Cart() {
   const { addItem, removeItem, removeAll } = useAddItems();
   const [page, setPage] = useState(1);
 
@@ -45,32 +44,37 @@ function Cart(){
   return (
     <Layout>
       <Title htmlTag="h1" size={55} style={{ textAlign: 'left' }}>
-        Your cart on ZeligStore
+        ¡Bienvenido a tu carrito!
       </Title>
-      <h1 style={{ textAlign: 'left', fontSize: '26px' }}>Total products: {totalItems2}</h1>
+      <h1 style={{ textAlign: 'left', fontSize: '26px' }}>Items agregados: {totalItems2}</h1>
       <h1 style={{ textAlign: 'left', fontSize: '26px' }}>Total: ${total2}</h1>
       <br />
       <div className="container-btn" style={{ textAlign: 'right' }}>
         <Button onClick={refresh}>
           <RefreshIcon></RefreshIcon>
         </Button>
-        <Button style={{marginLeft: '4px', background:'#46B98C'}} onClick={() => {redirectPaypal()}}>
+        <Button
+          style={{ marginLeft: '4px', background: '#46B98C' }}
+          onClick={() => {
+            redirectPaypal();
+          }}
+        >
           <PayIcon></PayIcon>
         </Button>
       </div>
-      { loading ? (
+      {loading ? (
         <p style={{ textAlign: 'center' }}>
           <b>Loading...</b>
         </p>
       ) : (
         <Row>
           {data?.docs?.map((product) => {
-            const { id, model, price, size, url } = product;
+            const { id, model, price, size, image } = product;
             return (
               <Col key={id} xs={12} md={6} lg={4}>
                 <CardShoes
-                  image={url}
-                  model={model.modelName}
+                  image={image.secure_url}
+                  model={model}
                   price={price}
                   size={size}
                   isAddCart={
@@ -99,7 +103,7 @@ function Cart(){
           })}
         </Row>
       )}
-      <br/>
+      <br />
       <div className="container-btn" style={{ justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
         <StyledPagination
           count={totalPages}
