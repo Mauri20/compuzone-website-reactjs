@@ -1,21 +1,20 @@
 @import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-
 }
 
-body{
+body {
   font-family: 'Poppins', sans-serif;
 }
 
-.login-form{
+.login-form {
   position: relative;
   min-height: 100vh;
   z-index: 0;
-  background: #6C63FF;
+  background: #6c63ff;
   padding: 40px;
   justify-content: center;
   display: grid;
@@ -23,12 +22,12 @@ body{
   align-items: center;
 }
 
-.container{
+.container {
   max-width: 890px;
   margin: 0 auto;
 }
 
-.login-form h1{
+.login-form h1 {
   text-align: center;
   font-family: 'Poppins', sans-serif;
   font-size: 3.5em;
@@ -37,7 +36,7 @@ body{
   text-shadow: 5px 5px 10px #ffffff;
 }
 
-.login-form h2{
+.login-form h2 {
   font-size: 30px;
   line-height: 40px;
   margin-bottom: 5px;
@@ -46,13 +45,13 @@ body{
   text-align: center;
 }
 
-.login-form .main{
+.login-form .main {
   position: relative;
   display: flex;
   margin: 30px 0;
 }
 
-.content{
+.content {
   align-items: center;
   text-align: center;
   flex-basis: 50%;
@@ -63,7 +62,7 @@ body{
   border-bottom-left-radius: 8px;
 }
 
-.form-img{
+.form-img {
   flex-basis: 50%;
   background: #f4f9fd;
   background-size: cover;
@@ -74,11 +73,11 @@ body{
   display: grid;
 }
 
-.form-img img{
+.form-img img {
   max-width: 100%;
 }
 
-p{
+p {
   color: #666;
   font-size: 16px;
   line-height: 25px;
@@ -86,15 +85,19 @@ p{
   text-align: center;
 }
 
-.boton-go, button, input{
+.boton-go,
+button,
+input {
   border-radius: 35px;
 }
 
-.boton-go:hover, button:hover, boton-registrar:hover{
+.boton-go:hover,
+button:hover,
+boton-registrar:hover {
   transition: 0.5s ease;
 }
 
-.boton-registrar{
+.boton-registrar {
   background: #65cf77;
   color: #fff;
   border: 2px solid #62ce6b;
@@ -103,7 +106,7 @@ p{
   padding: 8px 25px;
   cursor: pointer;
 }
-.boton-registrar:hover{
+.boton-registrar:hover {
   background: #348f43;
   color: #fff;
   border: 2px solid #317236;
@@ -113,15 +116,15 @@ p{
   cursor: pointer;
 }
 
-a{
+a {
   text-decoration: none;
 }
 
-.login-form .form1{
+.login-form .form1 {
   margin: 30px 0;
 }
 
-.login-form input{
+.login-form input {
   font-family: 'Poppins', sans-serif;
   outline: none;
   width: 100%;
@@ -137,30 +140,31 @@ a{
   transition: 0.3s ease;
 }
 
-.login-form input:focus{
+.login-form input:focus {
   background: transparent;
   color: #000;
   font-style: bold;
   border: 1px solid #0568c1;
 }
 
-.boton-go{
+.boton-go {
   font-family: 'Poppins', sans-serif;
   font-size: 18px;
   color: #fff;
   width: 70%;
-  background: #6C63FF;
+  background: #6c63ff;
   border: none;
   padding: 14px 15px;
   font-weight: 500;
   transition: 0.3s ease;
 }
 
-.boton-go:hover{
-  background: #4842AA;
+.boton-go:hover {
+  background: #4842aa;
 }
 
-p.account, p.account a{
+p.account,
+p.account a {
   text-align: center;
   padding-top: 20px;
   padding-bottom: 0;
@@ -168,34 +172,34 @@ p.account, p.account a{
   color: #333;
 }
 
-p.account a{
-  color: #6C63FF;
+p.account a {
+  color: #6c63ff;
 }
 
-p.account:hover{
+p.account:hover {
   text-decoration: underline;
-  color: #4842AA;
+  color: #4842aa;
 }
 
 /* Here will be the responsive design */
-@media(max-width: 736px){
-  .login-form .main{
-      flex-direction: column;
+@media (max-width: 736px) {
+  .login-form .main {
+    flex-direction: column;
   }
-  .login-form .form1{
-      margin-top: 30px;
-      margin-bottom: 10px;
+  .login-form .form1 {
+    margin-top: 30px;
+    margin-bottom: 10px;
   }
-  .form-img{
-      border-radius: 0;
-      border-bottom-left-radius: 8px;
-      border-bottom-right-radius: 8px;
-      order: 2;
+  .form-img {
+    border-radius: 0;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    order: 2;
   }
-  .content{
-      order: 1;
-      border-radius: 0;
-      border-top-left-radius: 8px;
-      border-top-right-radius: 8px;
+  .content {
+    order: 1;
+    border-radius: 0;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
   }
 }

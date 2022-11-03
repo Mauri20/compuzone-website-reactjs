@@ -70,7 +70,9 @@ export const AddItemsProvider = ({ children }) => {
   };
 
   return (
-    <AddItemsContext.Provider value={{ products, total, addItem, removeItem, removeAll }}>{children}</AddItemsContext.Provider>
+    <AddItemsContext.Provider value={{ products, total, addItem, removeItem, removeAll }}>
+      {children}
+    </AddItemsContext.Provider>
   );
 };
 
