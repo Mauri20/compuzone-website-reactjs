@@ -10,14 +10,41 @@ import CardShoes from '../components/Molecules/CardShoes';
 import { useAddItems } from 'context/AddItemsToCart';
 import styled from 'styled-components';
 import Pagination from '@mui/material/Pagination';
+import Swal from 'sweetalert2';
 
 function Cart() {
   const { addItem, removeItem, removeAll } = useAddItems();
   const [page, setPage] = useState(1);
 
   function redirectPaypal() {
-    window.location.href = 'https://www.paypal.com/sv/signin';
-    removeAll();
+    const products = JSON.parse(localStorage.getItem('products'));
+
+    if (Object.keys(products).length !== 0) {
+      if (localStorage.getItem('token')) {
+        window.location.href = 'https://www.paypal.com/sv/signin';
+        removeAll();
+      } else {
+        Swal.fire({
+          showCancelButton: true,
+          title: 'Info!',
+          text: '!Debes iniciar sesión para poder realizar el pago!, ¿Deseas iniciar sesión?',
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si',
+          cancelButtonText: 'No'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = '/users/login';
+          }
+        });
+      }
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Ups...',
+        text: 'Debes agregar productos al carrito para poder realizar el pago'
+      });
+    }
   }
 
   //Getting the data from the localStorage

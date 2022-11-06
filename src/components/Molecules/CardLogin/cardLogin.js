@@ -2,6 +2,7 @@ import './style.css';
 import Swal from 'sweetalert2'; //importing the sweetalert2 library to show alerts
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { validateForm } from './validation';
 
 const CardLogin = () => {
   // Creating states for the inputs of the form
@@ -12,36 +13,39 @@ const CardLogin = () => {
   //creating a function to handle the submit of the form to login
   async function handleSubmit(e) {
     e.preventDefault();
-    //sending the data to the backend
-    //const url = 'http://localhost:8080';
-    //const url = 'http://192.168.6.141:8080';
-    const url = 'https://zeligstore-api-nodejs-production-e0d5.up.railway.app';
-    const response = await fetch(url + '/v1/users/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ user, password }) //sending the data to the backend
-    });
-    const data = await response.json();
+    //calling the function to validate the form
+    if (validateForm(e, user, password)) {
+      //sending the data to the backend
+      const url = 'http://localhost:8080';
+      //const url = 'http://192.168.6.141:8080';
+      //const url = 'https://zeligstore-api-nodejs-production-e0d5.up.railway.app';
+      const response = await fetch(url + '/v1/users/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user, password }) //sending the data to the backend
+      });
+      const data = await response.json();
 
-    if (data.status === 'ok') {
-      localStorage.setItem('token', data.token); //saving the token in the local storage
-      Swal.fire({
-        title: '¡Bienvenido!',
-        text: data.message,
-        icon: 'success',
-        confirmButtonText: 'Ok'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          navigate('/trademarks'); //redirecting to the home page
-        }
-      });
-    } else {
-      Swal.fire({
-        title: '¡Error!',
-        text: data.message,
-        icon: 'error',
-        confirmButtonText: 'Ok'
-      });
+      if (data.status === 'ok') {
+        localStorage.setItem('token', data.token); //saving the token in the local storage
+        Swal.fire({
+          title: '¡Bienvenido!',
+          text: 'Iniciaste sesión correctamente',
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate('/trademarks'); //redirecting to the home page
+          }
+        });
+      } else {
+        Swal.fire({
+          title: '¡Error!',
+          text: 'Usuario o contraseña incorrectos',
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        });
+      }
     }
   }
 
@@ -53,15 +57,22 @@ const CardLogin = () => {
 
   return (
     <div className="login-form">
-      <h1>ZeligStore</h1>
+      <h1
+        onClick={() => {
+          navigate('/trademarks');
+        }}
+      >
+        ZeligStore
+      </h1>
       <div className="container">
         <div className="main">
           <div className="content">
             <h2>Inicio de sesión</h2>
-            <form className="form1" action="" method="" onSubmit={handleSubmit}>
+            <form className="form1" id="loginForm" action="" method="" onSubmit={handleSubmit}>
               <input
                 type="text"
                 name=""
+                id="user"
                 value={user}
                 onChange={(e) => setUser(e.target.value)}
                 placeholder="Escriba su Usuario"
@@ -71,6 +82,7 @@ const CardLogin = () => {
               <input
                 type="password"
                 name=""
+                id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Escriba su Contraseña"

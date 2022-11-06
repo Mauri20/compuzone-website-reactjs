@@ -2,6 +2,7 @@ import './style.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { validate } from './validation';
 
 const CardRegisterLogin = () => {
   //Creating states for the inputs of the form
@@ -17,17 +18,12 @@ const CardRegisterLogin = () => {
   //creating a function to handle the submit of the form
   async function handleSubmit(e) {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'The passwords do not match!'
-      });
-    } else {
+    const errors = validate({ userName, phone, user, address, password, confirmPassword });
+    if (Object.keys(errors).length === 0) {
       //sending the data to the backend
-      //const url = 'http://localhost:8080';
+      const url = 'http://localhost:8080';
       //const url = 'http://192.168.6.141:8080';
-      const url = 'https://zeligstore-api-nodejs-production-e0d5.up.railway.app';
+      //const url = 'https://zeligstore-api-nodejs-production-e0d5.up.railway.app';
       const response = await fetch(url + '/v1/users/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -37,8 +33,8 @@ const CardRegisterLogin = () => {
 
       if (data.status === 'ok') {
         Swal.fire({
-          title: 'Register successful!',
-          text: 'Now you can Logging in!',
+          title: 'Registro exitoso',
+          text: 'El usuario se ha creado correctamente',
           icon: 'success',
           confirmButtonText: 'Ok'
         }).then((result) => {
@@ -54,6 +50,14 @@ const CardRegisterLogin = () => {
           confirmButtonText: 'Ok'
         });
       }
+    } else {
+      Swal.fire({
+        title: '¡Error!',
+        text:
+          errors.userName || errors.phone || errors.user || errors.address || errors.password || errors.confirmPassword,
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      });
     }
   }
 
@@ -65,7 +69,13 @@ const CardRegisterLogin = () => {
 
   return (
     <div className="login-form">
-      <h1>ZeligStore</h1>
+      <h1
+        onClick={() => {
+          navigate('/trademarks');
+        }}
+      >
+        ZeligStore
+      </h1>
       <div className="container">
         <div className="main">
           <div className="content">
@@ -81,12 +91,12 @@ const CardRegisterLogin = () => {
                 autoFocus
               />
               <input
-                type="tel"
-                pattern="\d{8}" //This pattern is for the phone number format
+                type="tel" //This pattern is for the phone number format
                 name=""
+                pattern="[6-7]{1}[0-9]{3}-[0-9]{4}"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                placeholder="Tel&eacute;fono: 88888888" //This pattern is for the phone number format
+                placeholder="Escriba su n&uacute;mero de Tel&eacute;fono Ej: 0000-0000" //This pattern is for the phone number format
                 required
               />
               <input

@@ -22,18 +22,18 @@ const MenuNavbar = () => {
     handleNavigate = () => {
       Swal.fire({
         title: 'Info!',
-        text: 'Have you created your profile?',
+        text: '¿Ya has creado tu cuenta de usuario?',
         icon: 'info',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes',
+        confirmButtonText: 'Si',
         cancelButtonText: 'No'
       }).then((result) => {
         if (result.isConfirmed) {
           Swal.fire({
             title: 'Info!',
-            text: 'You will be redirected to the login page',
+            text: '¡Serás dirigido a la página de inicio de sesión!',
             icon: 'info',
             confirmButtonText: 'Ok'
           }).then((result) => {
@@ -45,7 +45,7 @@ const MenuNavbar = () => {
         if (result.dismiss === 'cancel') {
           Swal.fire({
             title: 'Info!',
-            text: 'You will be redirected to creating profile page',
+            text: '¡Serás dirigido a la página de registro de usuario!',
             icon: 'info',
             confirmButtonText: 'Ok'
           }).then((result) => {
@@ -60,21 +60,21 @@ const MenuNavbar = () => {
     handleNavigate = () => {
       // informing the user that will close the session if he/she is not logged in
       Swal.fire({
-        title: 'Are you sure?',
-        text: 'If you close the session you will lose the items in your cart',
+        title: '¿Deseas cerrar tu sesión?',
+        text: 'Si lo haces perderás todos los datos de tu carrito de compras',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes',
+        confirmButtonText: 'Si',
         cancelButtonText: 'No'
       }).then((result) => {
         if (result.isConfirmed) {
           localStorage.removeItem('token');
           removeAll();
           Swal.fire({
-            title: '¡Bye!',
-            text: 'You have closed the session',
+            title: '¡Adiós!',
+            text: 'Has cerrado tu sesión correctamente',
             icon: 'success',
             confirmButtonText: 'Ok'
           }).then((result) => {
