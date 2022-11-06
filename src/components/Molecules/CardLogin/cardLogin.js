@@ -16,9 +16,9 @@ const CardLogin = () => {
     //calling the function to validate the form
     if (validateForm(e, user, password)) {
       //sending the data to the backend
-      const url = 'http://localhost:8080';
+      //const url = 'http://localhost:8080';
       //const url = 'http://192.168.6.141:8080';
-      //const url = 'https://zeligstore-api-nodejs-production-e0d5.up.railway.app';
+      const url = 'https://zeligstore-api-nodejs-production-e0d5.up.railway.app';
       const response = await fetch(url + '/v1/users/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
