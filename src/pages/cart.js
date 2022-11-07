@@ -21,8 +21,19 @@ function Cart() {
 
     if (Object.keys(products).length !== 0) {
       if (localStorage.getItem('token')) {
-        window.location.href = 'https://www.paypal.com/sv/signin';
-        removeAll();
+        // Asking if want to pay or continue shopping
+        Swal.fire({
+          title: '¿Desea realizar su pago?',
+          showDenyButton: true,
+          showCancelButton: true,
+          confirmButtonText: `Pagar`,
+          denyButtonText: `Seguir comprando`
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = 'https://www.paypal.com/sv/signin';
+            removeAll();
+          }
+        });
       } else {
         Swal.fire({
           showCancelButton: true,
