@@ -27,7 +27,7 @@ function Cart() {
         Swal.fire({
           showCancelButton: true,
           title: 'Info!',
-          text: '!Debes iniciar sesión para poder realizar el pago!, ¿Deseas iniciar sesión?',
+          text: '¡Debes iniciar sesión para poder realizar el pago!, ¿Deseas iniciar sesión?',
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
           confirmButtonText: 'Si',

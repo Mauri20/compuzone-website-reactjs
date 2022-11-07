@@ -96,7 +96,7 @@ const CardRegisterLogin = () => {
                 pattern="[6-7]{1}[0-9]{3}-[0-9]{4}"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                placeholder="Escriba su n&uacute;mero de Tel&eacute;fono Ej: 0000-0000" //This pattern is for the phone number format
+                placeholder="Escriba su n&uacute;mero de Tel&eacute;fono Ej: 6000-0000 o 7000-0000" //This pattern is for the phone number format
                 required
               />
               <input
