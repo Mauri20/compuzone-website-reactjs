@@ -11,6 +11,7 @@ import { useAddItems } from 'context/AddItemsToCart';
 import styled from 'styled-components';
 import Pagination from '@mui/material/Pagination';
 import Swal from 'sweetalert2';
+import { Navigate } from 'react-router-dom';
 
 function Cart() {
   const { addItem, removeItem, removeAll } = useAddItems();
@@ -32,6 +33,8 @@ function Cart() {
           if (result.isConfirmed) {
             window.location.href = 'https://www.paypal.com/sv/signin';
             removeAll();
+          } else if (result.isDenied) {
+            Navigate('/');
           }
         });
       } else {
