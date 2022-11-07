@@ -34,7 +34,7 @@ function Cart() {
             window.location.href = 'https://www.paypal.com/sv/signin';
             removeAll();
           } else if (result.isDenied) {
-            Navigate('/');
+            window.location.href = '/';
           }
         });
       } else {
