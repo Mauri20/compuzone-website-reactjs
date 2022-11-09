@@ -61,6 +61,41 @@ const CardRegisterLogin = () => {
     }
   }
 
+  const handleChangePhone = (e) => {
+    const {value} = e.target;
+    const regexObj = {
+      regex9: /^([0-9]{4})(-)([0-9]{4})$/,
+      regex8: /^([0-9]{4})(-)([0-9]{3})$/,
+      regex7: /^([0-9]{4})(-)([0-9]{2})$/,
+      regex6: /^([0-9]{4})(-)([0-9])$/,
+      regex5: /^([0-9]{4})(-)$/,
+      regex4: /^([0-9]{4})$/,
+      regex3: /^([0-9]{3})$/,
+      regex2: /^([0-9]{2})$/,
+      regex1: /^([0-9])$/,
+    }
+    if (value.length > 0) {
+      setPhone((prevState) => {
+        if (value.length > prevState.length && value.length <= 9) {
+          if (regexObj[`regex${value.length}`].test(value)) {
+            if (value.length === 4) {
+              return value + '-';
+            }
+            return value;
+          }
+        } else if (value.length < prevState.length) {
+          if (value.length === 4) {
+            return value.slice(0, -1);
+          }
+          return value;
+        }
+        return prevState;
+      });
+    } else if (value.length === 0) {
+      setPhone('');
+    }
+  };
+
   //creating a function to handle the submit of the form to login
   async function handleSubmitLogin(e) {
     e.preventDefault();
@@ -93,10 +128,10 @@ const CardRegisterLogin = () => {
               <input
                 type="tel" //This pattern is for the phone number format
                 name=""
-                pattern="[6-7]{1}[0-9]{3}-[0-9]{4}"
+                //pattern="[6-7]{1}[0-9]{3}-[0-9]{4}"
                 value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                placeholder="Escriba su n&uacute;mero de Tel&eacute;fono Ej: 6000-0000 o 7000-0000" //This pattern is for the phone number format
+                onChange={handleChangePhone}
+                placeholder="Tel&eacute;fono: Ej. 7953-8765" //This pattern is for the phone number format
                 required
               />
               <input
