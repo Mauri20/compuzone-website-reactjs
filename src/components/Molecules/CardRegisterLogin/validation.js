@@ -4,9 +4,9 @@ export const validate = (values) => {
   if (!values.userName) {
     errors.userName = 'Obligatorio';
   } else if (!/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g.test(values.userName)) {
-    errors.userName = 'El nombre de usuario solo debe contener letras y comenzar con mayúscula';
+    errors.userName = 'El nombre completo del usuario solo debe contener letras y comenzar con mayúscula';
   } else if (values.userName.length < 10) {
-    errors.userName = 'El nombre de usuario no debe ser tan corto';
+    errors.userName = 'El nombre completo de usuario no debe ser tan corto';
   }
   //validating the phone number is required and is a number with area from Central America
   if (!values.phone) {
