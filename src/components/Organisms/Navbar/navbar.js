@@ -14,7 +14,7 @@ const Navbar = () => {
           navigate(`/trademark`);
         }}
       >
-        ZeligStore
+        CompuZone
       </TitleRedirected>
       <MenuNavbar />
     </StyleNavbar>

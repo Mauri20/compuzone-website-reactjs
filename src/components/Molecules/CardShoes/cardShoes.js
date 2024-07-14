@@ -17,7 +17,7 @@ const CardShoes = ({ image, trademark, model, style, category, price, size, colo
       </StyleButton>
       <StyleImage loading="lazy" src={image} />
       <TittleSmall>{model}</TittleSmall>
-      <TittleSmall>Talla: {size}</TittleSmall>
+      <TittleSmall>Medida: {size} pulgadas</TittleSmall>
       <TittleSmall style={{ textAlign: 'right', fontSize: '30px', fontStyle: 'bold' }}>${price}</TittleSmall>
     </StyleWrapper>
   );

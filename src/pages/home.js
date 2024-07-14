@@ -26,7 +26,7 @@ function Home() {
   return (
     <Layout>
       <Title htmlTag="h1" size={70}>
-        ¡Bienvenido a ZeligStore!
+        ¡Bienvenido a CompuZone!
       </Title>
       <br />
       <div className="container-btn" style={{ textAlign: 'center' }}>

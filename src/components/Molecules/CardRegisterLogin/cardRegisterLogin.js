@@ -21,9 +21,9 @@ const CardRegisterLogin = () => {
     const errors = validate({ userName, phone, user, address, password, confirmPassword });
     if (Object.keys(errors).length === 0) {
       //sending the data to the backend
-      //const url = 'http://localhost:8080';
+      const url = 'http://localhost:8080';
       //const url = 'http://192.168.6.141:8080';
-      const url = 'https://zeligstore-api-nodejs-production-f7c9.up.railway.app';
+      // const url = 'https://zeligstore-api-nodejs-production-f7c9.up.railway.app';
       const response = await fetch(url + '/v1/users/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

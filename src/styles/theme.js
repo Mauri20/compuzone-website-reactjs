@@ -1,6 +1,6 @@
 const colorsLight = {
-  primary: '#127dff',
-  secondary: '#7072CB',
+  primary: '#006D77',
+  secondary: '#006D77',
   accent: '#9c27b0',
   error: '#f44336',
   warning: '#ffeb3b',
@@ -11,7 +11,7 @@ const colorsLight = {
   transparent: 'transparent',
   background: '#ffffff',
   bgCard: 'rgba(100, 100, 200, .2)',
-  bgGradiant: '#7072CB',
+  bgGradiant: '#83c5be',
   text: '#000000',
   nav: 'rgba(255, 255, 255, 0.8)',
   paginationNav: '#9697A5',
