@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { validate } from './validation';
+import config from 'config';
 
 const CardRegisterLogin = () => {
   //Creating states for the inputs of the form
@@ -21,10 +22,10 @@ const CardRegisterLogin = () => {
     const errors = validate({ userName, phone, user, address, password, confirmPassword });
     if (Object.keys(errors).length === 0) {
       //sending the data to the backend
-      const url = 'http://localhost:8080';
+      const url = config.baseUrl;
       //const url = 'http://192.168.6.141:8080';
       // const url = 'https://zeligstore-api-nodejs-production-f7c9.up.railway.app';
-      const response = await fetch(url + '/v1/users/create', {
+      const response = await fetch(url + '/users/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userName, phone, user, address, password, userType }) //sending the data to the backend

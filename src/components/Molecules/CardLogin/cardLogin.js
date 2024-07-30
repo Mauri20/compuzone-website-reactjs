@@ -3,6 +3,7 @@ import Swal from 'sweetalert2'; //importing the sweetalert2 library to show aler
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { validateForm } from './validation';
+import config from 'config';
 
 const CardLogin = () => {
   // Creating states for the inputs of the form
@@ -16,10 +17,10 @@ const CardLogin = () => {
     //calling the function to validate the form
     if (validateForm(e, user, password)) {
       //sending the data to the backend
-      const url = 'http://localhost:8080';
+      const url = config.baseUrl;
       //const url = 'http://192.168.6.141:8080';
       // const url = 'https://zeligstore-api-nodejs-production-f7c9.up.railway.app';
-      const response = await fetch(url + '/v1/users/login', {
+      const response = await fetch(url + '/users/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user, password }) //sending the data to the backend
