@@ -1,7 +1,7 @@
 import Layout from 'components/Organisms/Layout';
 import Title from '../components/Atoms/Tittle';
 import { useQuery } from 'hooks/useQuery';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Button from '../components/Atoms/Button';
 import RefreshIcon from '../components/Atoms/Icons/RefreshIcon';
 import PayIcon from 'components/Atoms/Icons/PayFilled';
@@ -11,7 +11,6 @@ import { useAddItems } from 'context/AddItemsToCart';
 import styled from 'styled-components';
 import Pagination from '@mui/material/Pagination';
 import Swal from 'sweetalert2';
-import { Navigate } from 'react-router-dom';
 
 function Cart() {
   const { addItem, removeItem, removeAll } = useAddItems();
@@ -66,6 +65,7 @@ function Cart() {
   //Array of products
   let ArrayID = [];
   //Adding the id of the products to the array
+  // eslint-disable-next-line
   productsCart?.map((item) => {
     const { id } = item;
     ArrayID.push(id);

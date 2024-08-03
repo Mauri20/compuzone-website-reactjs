@@ -110,7 +110,7 @@ const CardRegisterLogin = () => {
           navigate('/trademarks');
         }}
       >
-        ZeligStore
+        Compuzone
       </h1>
       <div className="container">
         <div className="main">
@@ -180,7 +180,7 @@ const CardRegisterLogin = () => {
             </form>
           </div>
           <div className="form-img">
-            <img src="/ZeligStore_Icon.png" alt="form" />
+            <img src="/logo.png" alt="form" />
           </div>
         </div>
       </div>
