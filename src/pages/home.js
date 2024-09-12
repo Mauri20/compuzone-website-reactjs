@@ -9,6 +9,7 @@ import CardTradeMark from 'components/Molecules/CardTradeMark';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Pagination from '@mui/material/Pagination';
+import config from 'config';
 
 function Home() {
   const navigate = useNavigate();
@@ -17,6 +18,20 @@ function Home() {
 
   const { data, loading, refresh } = useQuery('/trademark', '', '', '', '', page);
 
+  const url = config.baseUrl;
+
+  useEffect(() => {
+    const response = fetch(url + '/maintainance', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (response) {
+      return;
+    }
+  }, []);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     //console.log({ data, loading });
   }, [loading, data]);
