@@ -26,6 +26,10 @@ export const ROUTES = {
   CART: {
     path: '/cart',
     absolutePath: '/cart'
+  },
+  DASHBOARD: {
+    path: '/dashboard',
+    absolutePath: '/dashboard'
   }
 };
 

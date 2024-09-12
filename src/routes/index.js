@@ -6,6 +6,7 @@ import Login from 'pages/login';
 import RegisterLogin from 'pages/registerlogin';
 import CatalogueShoes from 'pages/shoes';
 import Cart from 'pages/cart';
+import Dashboard from 'pages/dashboard';
 
 const Routes = () => {
   return (
@@ -16,6 +17,7 @@ const Routes = () => {
         <Route path={ROUTES.LOGIN.path} element={<Login />} />
         <Route path={ROUTES.REGISTERLOGIN.path} element={<RegisterLogin />} />
         <Route path={ROUTES.CART.path} element={<Cart />} />
+        <Route path={ROUTES.DASHBOARD.path} element={<Dashboard />} />
         <Route path="*" element={<Home />} />
       </ReactRoutes>
     </BrowserRouter>

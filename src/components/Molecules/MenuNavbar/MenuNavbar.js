@@ -4,6 +4,7 @@ import MoonFilled from 'components/Atoms/Icons/MoonFilled';
 import ProfileFilled from 'components/Atoms/Icons/ProfileFilled';
 import HomeFilled from 'components/Atoms/Icons/HomeFilled';
 import CartShoppingFilled from 'components/Atoms/Icons/CartShopping';
+import Maintainance from 'components/Atoms/Icons/Maintainance';
 import { StyleMenuItem, StyleMenuNavbar } from './style';
 import { useAddItems } from 'context/AddItemsToCart';
 import { useEffect } from 'react';
@@ -104,6 +105,15 @@ const MenuNavbar = () => {
         }}
       >
         <HomeFilled />
+      </StyleMenuItem>
+      <StyleMenuItem
+        color="transparent"
+        labelColor="text"
+        onClick={() => {
+          navigate('/dashboard');
+        }}
+      >
+        <Maintainance />
       </StyleMenuItem>
       <StyleMenuItem
         color="transparent"
