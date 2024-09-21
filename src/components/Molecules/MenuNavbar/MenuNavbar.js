@@ -5,6 +5,7 @@ import ProfileFilled from 'components/Atoms/Icons/ProfileFilled';
 import HomeFilled from 'components/Atoms/Icons/HomeFilled';
 import CartShoppingFilled from 'components/Atoms/Icons/CartShopping';
 import Maintainance from 'components/Atoms/Icons/Maintainance';
+import PlusIcon from 'components/Atoms/Icons/AddComputer';
 import { StyleMenuItem, StyleMenuNavbar } from './style';
 import { useAddItems } from 'context/AddItemsToCart';
 import { useEffect } from 'react';
@@ -96,6 +97,15 @@ const MenuNavbar = () => {
     <StyleMenuNavbar>
       <StyleMenuItem color="transparent" labelColor="text" onClick={themeToggle} style={{ fontSize: 18 }}>
         {theme === 'light' ? <MoonFilled /> : <SunFilled />}
+      </StyleMenuItem>
+      <StyleMenuItem
+        color="transparent"
+        labelColor="text"
+        onClick={() => {
+          navigate('/addcomputer');
+        }}
+      >
+        <PlusIcon />
       </StyleMenuItem>
       <StyleMenuItem
         color="transparent"

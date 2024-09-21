@@ -11,6 +11,7 @@ import styled from 'styled-components';
 import Pagination from '@mui/material/Pagination';
 import config from 'config';
 
+
 function Home() {
   const navigate = useNavigate();
 
@@ -19,7 +20,7 @@ function Home() {
   const { data, loading, refresh } = useQuery('/trademark', '', '', '', '', page);
 
   const url = config.baseUrl;
-
+  
   useEffect(() => {
     const response = fetch(url + '/maintainance', {
       method: 'POST',
@@ -43,6 +44,7 @@ function Home() {
       <Title htmlTag="h1" size={70}>
         ¡Bienvenido a CompuZone!
       </Title>
+      {/* <CarouselR images={images}/> */}
       <br />
       <div className="container-btn" style={{ textAlign: 'center' }}>
         <Button onClick={refresh}>

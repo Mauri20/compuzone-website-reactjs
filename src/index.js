@@ -9,6 +9,9 @@ import { AddItemsProvider } from 'context/AddItemsToCart';
 
 import Routes from 'routes';
 
+
+
+
 const App = memo(() => {
   const { theme } = useAppTheme();
 

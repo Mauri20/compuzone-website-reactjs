@@ -30,6 +30,10 @@ export const ROUTES = {
   DASHBOARD: {
     path: '/dashboard',
     absolutePath: '/dashboard'
+  },
+  COMPUTER: {
+    path: '/addcomputer',
+    absolutePath: '/addcomputer'
   }
 };
 

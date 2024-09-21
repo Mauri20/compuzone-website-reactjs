@@ -142,7 +142,7 @@ function CatalogueShoes() {
           {data?.docs?.map((product) => {
             const { id, color, trademark, model, style, category, price, size, image } = product;
             return (
-              <Col key={id} xs={12} md={6} lg={4}>
+              <Col key={id} xs={12} md={6} lg={3}>
                 <CardShoes
                   image={image.secure_url}
                   trademark={trademark.trademarkName}

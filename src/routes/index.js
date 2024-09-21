@@ -7,6 +7,7 @@ import RegisterLogin from 'pages/registerlogin';
 import CatalogueShoes from 'pages/shoes';
 import Cart from 'pages/cart';
 import Dashboard from 'pages/dashboard';
+import ComputerForm from 'pages/computer';
 
 const Routes = () => {
   return (
@@ -18,6 +19,7 @@ const Routes = () => {
         <Route path={ROUTES.REGISTERLOGIN.path} element={<RegisterLogin />} />
         <Route path={ROUTES.CART.path} element={<Cart />} />
         <Route path={ROUTES.DASHBOARD.path} element={<Dashboard />} />
+        <Route path={ROUTES.COMPUTER.path} element={<ComputerForm />} />
         <Route path="*" element={<Home />} />
       </ReactRoutes>
     </BrowserRouter>

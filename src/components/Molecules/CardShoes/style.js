@@ -18,7 +18,7 @@ export const StyleWrapper = styled.div`
 export const StyleImage = styled.img`
   border-radius: 12px;
   width: 100%;
-  height: 400px;
+  height: 300px;
   object-fit: cover;
 `;
 
